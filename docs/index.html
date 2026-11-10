@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sugrob — тихая зима для macOS</title>
+<meta name="description" content="Живые сугробы, тёплая гирлянда и ёлка на вашем Mac. Бесплатно и с открытым кодом.">
+<style>
+  :root { --bg:#0e1220; --ink:#eef4ff; --dim:#a9bbdc; --line:rgba(255,255,255,.14); --accent:#6fb7ff; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; }
+  body { background:#0e1220; color:var(--ink); font:17px/1.55 -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif; min-height:100vh; overflow-x:hidden; }
+  canvas { position:fixed; inset:0; pointer-events:none; z-index:2; }
+  main { position:relative; z-index:1; max-width:980px; margin:0 auto; padding:72px 20px 56px; }
+  h1 { font-size:clamp(46px,9vw,84px); line-height:1.02; margin:0 0 14px; letter-spacing:-.02em; }
+  .lead { font-size:clamp(18px,2.6vw,23px); color:var(--dim); max-width:640px; margin:0 0 30px; }
+  .cta { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:12px; }
+  .btn { background:var(--ink); color:#0e1220; font-weight:650; padding:13px 24px; border-radius:12px; text-decoration:none; }
+  .ghost { color:var(--ink); padding:13px 8px; text-decoration:none; border-bottom:1px solid var(--line); border-radius:0; }
+  .cmd { display:flex; gap:10px; align-items:center; background:rgba(0,0,0,.34); border:1px solid var(--line); border-radius:12px; padding:11px 14px; margin:18px 0 8px; }
+  .cmd code { flex:1; font:14px ui-monospace,Menlo,monospace; overflow-x:auto; white-space:nowrap; }
+  .cmd button { background:none; border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:5px 11px; font:inherit; font-size:13px; cursor:pointer; }
+  .note { font-size:14px; color:var(--dim); margin:0 0 40px; }
+  img.hero { width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:28px 36px; margin:52px 0; }
+  .grid h3 { margin:0 0 5px; font-size:18px; }
+  .grid p { margin:0; color:var(--dim); font-size:15.5px; }
+  footer { color:var(--dim); font-size:14px; border-top:1px solid var(--line); padding-top:20px; }
+  footer a { color:var(--ink); }
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<main>
+  <h1>Sugrob</h1>
+  <p class="lead" data-en="A quiet winter for your Mac: living drifts, a warm garland, a snowy tree and a countdown to New Year.">Тихая зима на вашем Mac: живые сугробы, тёплая гирлянда, заснеженная ёлка и счётчик до Нового года.</p>
+  <div class="cta">
+    <a class="btn" href="https://github.com/akoody/sugrob/releases/latest/download/Sugrob.dmg" data-en="Download for macOS">Скачать для macOS</a>
+    <a class="ghost" href="https://github.com/akoody/sugrob" data-en="Source code">Исходный код</a>
+  </div>
+  <div class="cmd"><code id="line">curl -fsSL https://raw.githubusercontent.com/akoody/sugrob/main/install.sh | bash</code><button id="copy" data-en="Copy">Копировать</button></div>
+  <p class="note" data-en="Free, open source, about 2 MB. macOS 13 or later. No network access and no system permissions. After a DMG download, allow the first launch in System Settings → Privacy &amp; Security.">Бесплатно, открытый код, около 2 МБ. macOS 13 и новее. Без сети и без системных разрешений. После скачивания DMG разрешите первый запуск в «Системных настройках → Конфиденциальность и безопасность».</p>
+  <img class="hero" src="screenshot.jpg" width="1920" height="1080" alt="Снег на окнах, снеговики и сани на рабочем столе">
+  <section class="grid">
+    <div><h3 data-en="Living drifts">Живые сугробы</h3><p data-en="The wind stirs them, the cursor leaves soft dents, and clicks pass straight through.">Их перебирает ветер, курсор оставляет мягкие следы, а клики проходят насквозь.</p></div>
+    <div><h3 data-en="Warm garland">Тёплая гирлянда</h3><p data-en="One thin strand under the menu bar that slowly breathes.">Одна тонкая нить под строкой меню, которая медленно дышит.</p></div>
+    <div><h3 data-en="Your own snowman">Свой снеговик</h3><p data-en="Roll balls through real snow and stack three.">Скатайте комья из настоящего снега и сложите три.</p></div>
+    <div><h3 data-en="Midnight fireworks">Салют в полночь</h3><p data-en="At the turn of the year, a short golden show.">В новогоднюю ночь — короткий золотой салют.</p></div>
+    <div><h3 data-en="A picture, not a video">Картина, а не видео</h3><p data-en="While nothing happens, Sugrob draws nothing. The settings show how many CPU seconds it used today.">Пока ничего не происходит, Sugrob ничего не рисует. В настройках видно, сколько секунд процессора он потратил за день.</p></div>
+  </section>
+  <footer>Sugrob · MIT · <a href="https://github.com/akoody/sugrob">GitHub</a></footer>
+</main>
+<script>
+  if (!(navigator.language || '').toLowerCase().startsWith('ru')) {
+    document.documentElement.lang = 'en';
+    document.querySelectorAll('[data-en]').forEach(function (n) { n.innerHTML = n.getAttribute('data-en'); });
+    document.title = 'Sugrob — a quiet winter for macOS';
+  }
+  var copy = document.getElementById('copy');
+  copy.addEventListener('click', function () {
+    navigator.clipboard.writeText(document.getElementById('line').textContent).then(function () { copy.textContent = '✓'; });
+  });
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var c = document.getElementById('snow'), x = c.getContext('2d'), w, h, f = [];
+  function size() { w = c.width = innerWidth; h = c.height = innerHeight; }
+  addEventListener('resize', size); size();
+  for (var i = 0; i < 90; i++) f.push({ x: Math.random() * w, y: Math.random() * h, r: 1 + Math.random() * 2.4, s: .4 + Math.random() * 1.1, p: Math.random() * 6 });
+  function draw() {
+    x.clearRect(0, 0, w, h); x.fillStyle = 'rgba(255,255,255,.85)';
+    f.forEach(function (d) {
+      d.y += d.s; d.p += .012; var px = d.x + Math.sin(d.p) * 14;
+      if (d.y > h + 4) { d.y = -4; d.x = Math.random() * w; }
+      x.beginPath(); x.arc(px, d.y, d.r, 0, 6.3); x.fill();
+    });
+    if (!still) requestAnimationFrame(draw);
+  }
+  draw();
+</script>
+</body>
+</html>
