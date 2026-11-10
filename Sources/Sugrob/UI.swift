@@ -288,7 +288,7 @@ enum Welcome {
     static func showIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: "welcomed") else { return }
         UserDefaults.standard.set(true, forKey: "welcomed")
-        Toast.show(L("С наступающим! Настройки — под снежинкой в строке меню", "Happy holidays! Settings live under the snowflake in the menu bar"), seconds: 6)
+        Toast.show(L("С наступающим! Настройки спрятаны под снежинкой в строке меню", "Happy holidays! Settings live under the snowflake in the menu bar"), seconds: 6)
     }
 }
 

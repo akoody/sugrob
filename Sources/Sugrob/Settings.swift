@@ -47,7 +47,7 @@ enum Tool: Int, CaseIterable, Identifiable {
     var hint: String {
         switch self {
         case .snowball: return L("Зажми и брось рывком", "Hold and fling")
-        case .snowman: return L("Катай ком по снегу и клади на другой. Три кома — снеговик", "Roll balls through snow and stack three")
+        case .snowman: return L("Катай ком по снегу и клади на другой. Из трёх комов получится снеговик", "Roll balls through snow and stack three")
         }
     }
 }
