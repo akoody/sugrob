@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and self-test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: ONLY_NATIVE=1 ./scripts/build_app.sh
+
+      - name: Self-test
+        # Hosted runners may have no usable display or Metal device.
+        continue-on-error: true
+        run: dist/Sugrob.app/Contents/MacOS/Sugrob --selftest
