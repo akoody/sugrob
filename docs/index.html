@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sugrob — тихая зима для macOS</title>
+<title>Sugrob: тихая зима для macOS</title>
 <meta name="description" content="Живые сугробы, тёплая гирлянда и ёлка на вашем Mac. Бесплатно и с открытым кодом.">
 <style>
   :root { --bg:#0e1220; --ink:#eef4ff; --dim:#a9bbdc; --line:rgba(255,255,255,.14); --accent:#6fb7ff; }
@@ -45,7 +45,7 @@
     <div><h3 data-en="Living drifts">Живые сугробы</h3><p data-en="The wind stirs them, the cursor leaves soft dents, and clicks pass straight through.">Их перебирает ветер, курсор оставляет мягкие следы, а клики проходят насквозь.</p></div>
     <div><h3 data-en="Warm garland">Тёплая гирлянда</h3><p data-en="One thin strand under the menu bar that slowly breathes.">Одна тонкая нить под строкой меню, которая медленно дышит.</p></div>
     <div><h3 data-en="Your own snowman">Свой снеговик</h3><p data-en="Roll balls through real snow and stack three.">Скатайте комья из настоящего снега и сложите три.</p></div>
-    <div><h3 data-en="Midnight fireworks">Салют в полночь</h3><p data-en="At the turn of the year, a short golden show.">В новогоднюю ночь — короткий золотой салют.</p></div>
+    <div><h3 data-en="Midnight fireworks">Салют в полночь</h3><p data-en="At the turn of the year, a short golden show.">В новогоднюю ночь будет короткий золотой салют.</p></div>
     <div><h3 data-en="A picture, not a video">Картина, а не видео</h3><p data-en="While nothing happens, Sugrob draws nothing. The settings show how many CPU seconds it used today.">Пока ничего не происходит, Sugrob ничего не рисует. В настройках видно, сколько секунд процессора он потратил за день.</p></div>
   </section>
   <footer>Sugrob · MIT · <a href="https://github.com/akoody/sugrob">GitHub</a></footer>
@@ -54,7 +54,7 @@
   if (!(navigator.language || '').toLowerCase().startsWith('ru')) {
     document.documentElement.lang = 'en';
     document.querySelectorAll('[data-en]').forEach(function (n) { n.innerHTML = n.getAttribute('data-en'); });
-    document.title = 'Sugrob — a quiet winter for macOS';
+    document.title = 'Sugrob: a quiet winter for macOS';
   }
   var copy = document.getElementById('copy');
   copy.addEventListener('click', function () {
