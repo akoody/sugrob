@@ -3,7 +3,7 @@ import simd
 
 typealias V2 = SIMD2<Float>
 
-let appVersion = "3.2.0"
+let appVersion = "3.2.1"
 
 /// Interface language follows the system: Russian if it is preferred, English otherwise.
 let isRussian = Locale.preferredLanguages.first?.lowercased().hasPrefix("ru") ?? false
